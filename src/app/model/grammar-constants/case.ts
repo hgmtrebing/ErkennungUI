@@ -1,0 +1,6 @@
+export enum Case {
+  NOMINATIVE = "NOMINATIVE",
+  ACCUSATIVE = "ACCUSATIVE",
+  DATIVE = "DATIVE",
+  GENITIVE = "GENITIVE"
+}

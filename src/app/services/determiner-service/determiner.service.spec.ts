@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DeterminerServiceService } from './determiner-service.service';
+import { DeterminerService } from './determiner.service';
 
 describe('ArticleServiceService', () => {
-  let service: DeterminerServiceService;
+  let service: DeterminerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DeterminerServiceService);
+    service = TestBed.inject(DeterminerService);
   });
 
   it('should be created', () => {
