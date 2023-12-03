@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {DeterminerForm} from "../../model/determiner-form";
-import {Gender} from "../../model/gender";
-import {Number} from "../../model/number";
-import {Case} from "../../model/case";
-import {DeterminerType} from "../../model/determiner-type";
+import {Gender} from "../../model/grammar-constants/gender";
+import {Number} from "../../model/grammar-constants/number";
+import {Case} from "../../model/grammar-constants/case";
+import {DeterminerType} from "../../model/grammar-constants/determiner-type";
 
 
 @Injectable({

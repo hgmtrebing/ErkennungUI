@@ -1,7 +1,7 @@
-import {Gender} from "./gender";
-import {Case} from "./case";
-import {Number} from "./number";
-import {DeterminerType} from "./determiner-type";
+import {Gender} from "./grammar-constants/gender";
+import {Case} from "./grammar-constants/case";
+import {Number} from "./grammar-constants/number";
+import {DeterminerType} from "./grammar-constants/determiner-type";
 
 export class DeterminerForm {
 
