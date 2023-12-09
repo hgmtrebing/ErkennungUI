@@ -19,7 +19,4 @@ import {MultiNumberPickerComponent} from "../multi-number-picker/multi-number-pi
 })
 export class DeterminerQuizComponent {
 
-  protected readonly DeterminerType = DeterminerType;
-  protected readonly Object = Object;
-
 }

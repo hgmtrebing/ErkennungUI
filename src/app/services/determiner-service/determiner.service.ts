@@ -17,8 +17,8 @@ export class DeterminerService {
     this.initialize();
   }
 
-  public filter(genders: Gender[], cases: Case[], numbers: Number[], types: DeterminerType[]): void {
-    this.determiners.filter((form: DeterminerForm) => {
+  public filter(genders: Gender[], cases: Case[], numbers: Number[], types: DeterminerType[]): DeterminerForm[] {
+    return this.determiners.filter((form: DeterminerForm) => {
       let returnVal: boolean;
       returnVal = genders == null || genders.length < 1 || genders.includes(form.gender);
       returnVal = returnVal && (cases == null || cases.length < 1 || cases.includes(form.caze));
