@@ -3,32 +3,53 @@
   <!-- Pickers -->
     <!-- Determiner Picker -->
     <section id="determiner-picker">
+      <span *ngFor="let type of typesCheckboxes">
+        <mat-checkbox [value]="type.value" [formControl]="type.control" (change)="onSelectionChange()">{{type.label}}</mat-checkbox>
+      </span>
     </section>
 
     <!-- Case Picker -->
     <section id="case-picker">
-      <app-multi-case-picker></app-multi-case-picker>
+      <span *ngFor="let caze of casesCheckboxes">
+        <mat-checkbox [value]="caze.value" [formControl]="caze.control" (change)="onSelectionChange()">{{caze.label}}</mat-checkbox>
+      </span>
     </section>
 
     <!-- Gender Picker -->
     <section id="gender-picker">
-      <app-multi-gender-picker></app-multi-gender-picker>
+      <span *ngFor="let gender of genderCheckboxes">
+        <mat-checkbox [value]="gender.value" [formControl]="gender.control" (change)="onSelectionChange()">{{gender.label}}</mat-checkbox>
+      </span>
     </section>
 
     <!-- Number Picker -->
     <section id="number-picker">
-      <app-multi-number-picker></app-multi-number-picker>
+      <span *ngFor="let number of numberCheckboxes">
+        <mat-checkbox [value]="number.value" [formControl]="number.control" (change)="onSelectionChange()">{{number.label}}</mat-checkbox>
+      </span>
     </section>
 
   <!-- Question -->
-    <!-- Question Determiner -->
-    <!-- Question Case -->
-    <!-- Question Gender -->
-    <!-- Question Number -->
+
+  <!-- Question Determiner -->
+  <p>Determiner Type: {{currentType}}</p>
+
+  <!-- Question Case -->
+  <p>Case: {{currentCase}}</p>
+
+  <!-- Question Gender -->
+  <p>Gender: {{currentGender}}</p>
+
+  <!-- Question Number -->
+  <p>Number: {{currentNumber}}</p>
 
   <!-- User Input -->
+  <mat-label>What Determiner is this?</mat-label>
+  <input matInput [formControl]="userGuess">
   <!-- Result -->
 
   <!-- Submit / Skip Buttons -->
+  <button mat-flat-button color="primary" (click)="checkAnswer()">Submit Answer</button>
+  <button mat-flat-button color="accent" (click)="getNextDeterminer()">Skip to Next Question</button>
 
 </div>
