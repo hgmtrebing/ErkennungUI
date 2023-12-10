@@ -11,6 +11,7 @@ Determiner Quiz, Next Steps:
   - Add Dividers between sections
   - Add Indefinite Articles
   - Add Indefinite Negation Articles
+  - Fix Randomization and Question Selection process
 
 Application Next Steps:
   - Remove unused components and services

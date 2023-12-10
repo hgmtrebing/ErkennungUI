@@ -9,6 +9,7 @@ import {Case} from "../../model/grammar-constants/case";
 import {DeterminerService} from "../../services/determiner-service/determiner.service";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {DeterminerForm} from "../../model/determiner-form";
 
 @Component({
   selector: 'app-determiner-quiz',
@@ -47,10 +48,8 @@ export class DeterminerQuizComponent {
     {label: "Definite Article", value: DeterminerType.DEFINITE_ARTICLE, control: new FormControl<boolean>(true)}
   ];
 
-  private allowedNumbers: Number[] = [];
-  private allowedGenders: Gender[] = [];
-  private allowedCases: Case[] = [];
-  private allowedTypes: DeterminerType[] = [];
+  public determiners: DeterminerForm[] = [];
+  public currentDeterminer: number = 0;
 
   public currentNumber: Number | null        = null;
   public currentGender: Gender | null        = null;
@@ -61,6 +60,7 @@ export class DeterminerQuizComponent {
   public userGuess: FormControl<string | null> = new FormControl<string>("");
 
   constructor(private readonly determinerService: DeterminerService) {
+    this.recomputeSelections();
     this.getNextDeterminer();
   }
 
@@ -70,47 +70,70 @@ export class DeterminerQuizComponent {
 
   recomputeSelections(): void {
 
-    // Reset all the Requested Parameters, since we are about to recompute them.
-    this.allowedNumbers = [];
-    this.allowedGenders = [];
-    this.allowedCases = [];
-    this.allowedTypes = [];
+    let allowedNumbers: Number[] = [];
+    let allowedGenders: Gender[] = [];
+    let allowedCases: Case[] = [];
+    let allowedTypes: DeterminerType[] = [];
+
 
     for (let number of this.numberCheckboxes) {
       if (number.control.value) {
-        this.allowedNumbers.push(number.value);
+        allowedNumbers.push(number.value);
       }
     }
 
     for (let gender of this.genderCheckboxes) {
       if (gender.control.value) {
-        this.allowedGenders.push(gender.value);
+        allowedGenders.push(gender.value);
       }
     }
 
     for (let caze of this.casesCheckboxes) {
       if (caze.control.value) {
-        this.allowedCases.push(caze.value);
+        allowedCases.push(caze.value);
       }
     }
 
     for (let type of this.typesCheckboxes) {
       if (type.control.value) {
-        this.allowedTypes.push(type.value);
+        allowedTypes.push(type.value);
       }
     }
+
+    this.currentDeterminer = 0;
+    this.determiners = this.determinerService.filter(allowedGenders, allowedCases, allowedNumbers, allowedTypes);
+
+    for (let i = 0; i < (this.determiners.length * 10); i++) {
+      let index01 = i % 10;
+      let index02 = Math.floor(Math.random()* this.determiners.length);
+
+      let swap = this.determiners[index01];
+      this.determiners[index01] = this.determiners[index02];
+      this.determiners[index02] = swap;
+
+    }
+
+
   }
 
   getNextDeterminer(): void {
-    let determiners = this.determinerService.filter(this.allowedGenders, this.allowedCases, this.allowedNumbers, this.allowedTypes);
-    let determiner = determiners[ Math.floor((Math.random()*500) % determiners.length)];
+
+    if (this.determiners.length <= 0) {
+      // This is an error condition; log an error message of some kind
+      return;
+    }
+
+    let determiner = this.determiners[this.currentDeterminer++];
+
+    if (this.currentDeterminer >= this.determiners.length) {
+      this.currentDeterminer = 0;
+    }
 
     this.currentCase = determiner.caze;
     this.currentType = determiner.type;
     this.currentGender = determiner.gender;
     this.currentNumber = determiner.number;
     this.currentForm = determiner.germanForm;
-
   }
 
   checkAnswer(): void {
