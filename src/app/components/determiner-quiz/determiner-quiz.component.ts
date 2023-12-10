@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {DeterminerType} from "../../model/grammar-constants/determiner-type";
-import {MultiCasePickerComponent} from "../multi-case-picker/multi-case-picker.component";
-import {MultiGenderPickerComponent} from "../multi-gender-picker/multi-gender-picker.component";
-import {MultiNumberPickerComponent} from "../multi-number-picker/multi-number-picker.component";
 import {Number} from "../../model/grammar-constants/number";
 import {NgForOf} from "@angular/common";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
@@ -18,9 +15,6 @@ import {MatInputModule} from "@angular/material/input";
   standalone: true,
   imports: [
     MatCheckboxModule,
-    MultiCasePickerComponent,
-    MultiGenderPickerComponent,
-    MultiNumberPickerComponent,
     NgForOf,
     ReactiveFormsModule,
     MatButtonModule,
